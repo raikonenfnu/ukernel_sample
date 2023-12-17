@@ -1,0 +1,7 @@
+python value_generator.py
+~/nod/iree-build-notrace/install/bin/iree-compile argmax_3d_linalg.mlir --iree-rocm-target-chip=gfx940 --iree-input-type=torch --iree-hal-target-backends=rocm --iree-rocm-enable-ukernels=argmax --iree-rocm-link-bc=true --verify=true -o ukernel_argmax.vmfb --mlir-print-ir-after-all 2> cool.mlir
+~/nod/iree-build-notrace/install/bin/iree-run-module --device=rocm --module=ukernel_argmax.vmfb --function=argmax_3d_dyn_f32i64 --input=@argmax_3d_input_f32.npy --output=@actual_out_f32i64.npy --expected_output=@argmax_3d_output_f32.npy
+~/nod/iree-build-notrace/install/bin/iree-run-module --device=rocm --module=ukernel_argmax.vmfb --function=argmax_3d_dyn_f16i64 --input=@argmax_3d_input_f16.npy --output=@actual_out_f16i64.npy --expected_output=@argmax_3d_output_f16.npy
+~/nod/iree-build-notrace/install/bin/iree-run-module --device=rocm --module=ukernel_argmax.vmfb --function=argmax_3d_dyn_f32i32 --input=@argmax_3d_input_f32.npy --output=@actual_out_f32i32.npy --expected_output=@argmax_3d_output_f32.npy
+~/nod/iree-build-notrace/install/bin/iree-run-module --device=rocm --module=ukernel_argmax.vmfb --function=argmax_3d_dyn_f16i32 --input=@argmax_3d_input_f16.npy --output=@actual_out_f16i32.npy --expected_output=@argmax_3d_output_f16.npy
+# python test_res.py

@@ -7,7 +7,9 @@ fi
 python value_generator.py
 echo "If it works correctly, result should be 237, this is hardcoded from the py script."
 ~/nod/iree-build-notrace/install/bin/iree-run-module --module=ukernel_argmax.vmfb --device=rocm --function=forward --input=@input0.npy --device_allocator=caching
+~/nod/iree-build-notrace/install/bin/iree-benchmark-module --module=ukernel_argmax.vmfb --device=rocm --function=forward --input=@input0.npy --device_allocator=caching
 echo "Now testing for fp16, if it works correctly, result should still be 237."
 ~/nod/iree-build-notrace/install/bin/iree-run-module --module=ukernel_argmax.vmfb --device=rocm --function=forward_f16 --input=@input0_f16.npy --device_allocator=caching
+~/nod/iree-build-notrace/install/bin/iree-benchmark-module --module=ukernel_argmax.vmfb --device=rocm --function=forward --input=@input0.npy --device_allocator=caching
 # Clean up.
 rm ukernel_argmax.vmfb argmax.bc input0.npy input0_f16.npy
