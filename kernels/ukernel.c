@@ -1,7 +1,8 @@
 #include <hip/hip_runtime.h>
 #include <hip/hip_fp16.h>
 
-extern "C" __device__ void simple_mul_workgroup(float *lhs, size_t lhs_offset,
+// device for ukernel, global for code object link.
+extern "C" __global__ void simple_mul_workgroup(float *lhs, size_t lhs_offset,
                                                 float *rhs, size_t rhs_offset,
                                                 float *result,
                                                 size_t result_offset,
